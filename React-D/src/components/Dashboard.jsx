@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllPosts, deletePost, loadDefaults } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import DiaryCard from './DiaryCard';
 import SearchBar from './SearchBar';
 import LoadDefaults from './LoadDefaults';
@@ -11,9 +12,11 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { username, logout } = useAuth();
 
   useEffect(() => {
     fetchPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchPosts = async () => {
@@ -59,9 +62,14 @@ const Dashboard = () => {
     setPosts(results);
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-title">Developer's Diary</h1>
+      <h1 className="dashboard-title">{username}'s Diary</h1>
       <div className="dashboard-actions">
         <SearchBar onSearchResults={handleSearchResults} />
         <button className="primary-button add-button" onClick={() => navigate('/add')}>
@@ -69,6 +77,9 @@ const Dashboard = () => {
         </button>
         <button className="secondary-button home-button" onClick={() => navigate('/')}>
           Home
+        </button>
+        <button className="secondary-button" onClick={handleLogout}>
+          Log Out
         </button>
       </div>
       

@@ -6,7 +6,6 @@ import { addPost } from '../services/api';
 const AddPost = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    dairyId: '',
     dairyFaced: '',
     dairyLearned: '',
     dairyImprovements: '',
@@ -24,34 +23,35 @@ const AddPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Simple validation
-    if (!formData.dairyId || !formData.dairyFaced || !formData.dairyLearned) {
-      setError('Please fill in all required fields (ID, Faced, Learned)');
+    if (!formData.dairyFaced || !formData.dairyLearned) {
+      setError('Please fill in all required fields (Faced, Learned)');
       return;
     }
-    
+
     try {
       setLoading(true);
       setError(null);
+      // The entry's ID and owner are assigned by the server based on the
+      // logged-in user - the client never sends either.
       await addPost(formData);
       setSuccess(true);
-      
+
       // Reset form
       setFormData({
-        dairyId: '',
         dairyFaced: '',
         dairyLearned: '',
         dairyImprovements: '',
         dairyTomorrowPlan: '',
         dairyDescription: ''
       });
-      
+
       // Redirect after short delay
       setTimeout(() => {
         navigate('/dashboard');
       }, 2000);
-      
+
     } catch (err) {
       setError('Failed to add diary entry. Please try again.');
     } finally {
@@ -62,7 +62,7 @@ const AddPost = () => {
   return (
     <div className="form-container">
       <h1 className="form-title">Add a New Diary Entry</h1>
-      
+
       {error && <div className="error-message">{error}</div>}
       {success && (
         <div className="success-message">
@@ -74,21 +74,8 @@ const AddPost = () => {
           Added successfully!
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit} className="diary-form">
-        <div className="form-group">
-          <label htmlFor="dairyId">Entry ID*</label>
-          <input
-            type="number"
-            id="dairyId"
-            name="dairyId"
-            value={formData.dairyId}
-            onChange={handleChange}
-            placeholder="Enter a unique ID number"
-            required
-          />
-        </div>
-        
         <div className="form-group">
           <label htmlFor="dairyFaced">Problem Faced*</label>
           <input
@@ -101,7 +88,7 @@ const AddPost = () => {
             required
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="dairyLearned">What You Learned*</label>
           <textarea
@@ -114,7 +101,7 @@ const AddPost = () => {
             rows="4"
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="dairyImprovements">Areas for Improvement</label>
           <textarea
@@ -126,7 +113,7 @@ const AddPost = () => {
             rows="3"
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="dairyTomorrowPlan">Tomorrow's Plan</label>
           <textarea
@@ -138,7 +125,7 @@ const AddPost = () => {
             rows="3"
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="dairyDescription">Additional Notes</label>
           <textarea
@@ -150,13 +137,13 @@ const AddPost = () => {
             rows="3"
           />
         </div>
-        
+
         <div className="form-actions">
           <button type="submit" className="primary-button" disabled={loading}>
             {loading ? 'Adding...' : 'Add Entry'}
           </button>
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="secondary-button"
             onClick={() => navigate('/dashboard')}
           >
@@ -164,9 +151,9 @@ const AddPost = () => {
           </button>
         </div>
       </form>
-      
+
       <div className="form-footer">
-        <button 
+        <button
           className="text-button"
           onClick={() => navigate('/dashboard')}
         >

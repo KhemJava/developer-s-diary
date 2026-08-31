@@ -92,9 +92,31 @@ The backend exposes a RESTful API for communication with the frontend:
 - `DELETE /api/posts/{id}` - Delete a diary post
 - `GET /api/posts/search?keyword={keyword}` - Search diary posts
 
+### 🔐 Authentication API
+
+The backend now uses Spring Security with stateless JWT authentication. All diary endpoints require a valid token except the two below.
+
+- `POST /api/auth/register` - Create a new account
+  ```json
+  { "username": "khem", "email": "khem@example.com", "password": "yourpassword" }
+  ```
+- `POST /api/auth/login` - Log in and receive a JWT
+  ```json
+  { "username": "khem", "password": "yourpassword" }
+  ```
+  Response:
+  ```json
+  { "token": "eyJhbGciOi...", "type": "Bearer", "username": "khem", "email": "khem@example.com" }
+  ```
+
+For every protected request, include the token as a header:
+```
+Authorization: Bearer <token>
+```
+
 ## 📝 Future Improvements
 
-- [ ] Implement user authentication and authorization
+- [x] Implement user authentication and authorization
 - [ ] Add tagging functionality to diary posts
 - [ ] Integrate with GitHub to automatically log coding activity
 - [ ] Implement statistics and visualization of coding patterns
