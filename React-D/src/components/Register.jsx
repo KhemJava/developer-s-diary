@@ -37,7 +37,7 @@ const Register = () => {
 
       setTimeout(() => {
         navigate('/login');
-      }, 1500);
+      }, 3500);
     } catch (err) {
       setError(err.message || 'Registration failed. Please try again.');
     } finally {
@@ -57,7 +57,7 @@ const Register = () => {
             <div className="checkmark-stem"></div>
             <div className="checkmark-kick"></div>
           </div>
-          Account created! Redirecting to login...
+          Account created! We've sent a verification link to your email &mdash; confirm it before logging in. Redirecting to login...
         </div>
       )}
 

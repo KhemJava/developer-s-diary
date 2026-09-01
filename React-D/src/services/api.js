@@ -43,9 +43,35 @@ export const loginUser = async (username, password) => {
   });
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(data.message || 'Invalid username or password');
+    const err = new Error(data.message || 'Invalid username or password');
+    err.code = data.code;
+    throw err;
   }
   return data; // { token, type, username, email }
+};
+
+export const verifyEmail = async (token) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/verify?token=${encodeURIComponent(token)}`);
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const err = new Error(data.message || 'Verification failed');
+    err.code = data.code;
+    throw err;
+  }
+  return data;
+};
+
+export const resendVerification = async (email) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/resend-verification`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data.message || 'Could not resend verification email');
+  }
+  return data;
 };
 
 export const getAllPosts = async () => {

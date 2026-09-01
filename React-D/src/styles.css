@@ -540,6 +540,405 @@
     transform: translateY(-3px);
   }
   
+  /* Email verification */
+  .resend-verification-box {
+    background-color: #fff8e6;
+    border: 1px solid #ffe4a3;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .resend-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .resend-row input {
+    flex-grow: 1;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.95rem;
+  }
+
+  .resend-status {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .verify-email-container {
+    text-align: center;
+  }
+
+  .verify-status.verifying {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 0;
+    color: #666;
+  }
+
+  .spinner {
+    width: 36px;
+    height: 36px;
+    border: 4px solid #e8f4fd;
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ===== Add Diary Entry — visual overhaul ===== */
+  .add-entry-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 10px 30px;
+  }
+
+  .entry-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: linear-gradient(135deg, #3498db 0%, #6c5ce7 55%, #9b59b6 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 26px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(52, 73, 219, 0.25);
+    animation: heroFadeIn 0.5s ease both;
+  }
+
+  .entry-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 85% 20%, rgba(255,255,255,0.18), transparent 55%);
+  }
+
+  .entry-hero-text {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    flex: 1;
+  }
+
+  .entry-hero-text h1 {
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+
+  .entry-hero-text p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  .hero-illustration {
+    width: 180px;
+    min-width: 140px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15));
+  }
+
+  .hero-book {
+    animation: heroBookFloat 4s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  .hero-pen {
+    animation: heroPenWiggle 2.6s ease-in-out infinite;
+    transform-origin: 250px 78px;
+  }
+
+  .hero-sparkle {
+    animation: sparklePulse 1.8s ease-in-out infinite;
+  }
+
+  .hero-sparkle-2 { animation-delay: 0.5s; }
+  .hero-sparkle-3 { animation-delay: 1s; }
+
+  @keyframes heroBookFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  @keyframes heroPenWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-6deg); }
+  }
+
+  @keyframes sparklePulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .entry-progress-track {
+    width: 100%;
+    height: 8px;
+    background-color: #e9edf1;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+
+  .entry-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+
+  .entry-progress-label {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 20px;
+    text-align: right;
+  }
+
+  .entry-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .entry-form-grid .field-card:nth-child(1),
+  .entry-form-grid .field-card:nth-child(2) {
+    grid-column: span 1;
+  }
+
+  .field-card {
+    background-color: #fff;
+    border: 1px solid #edf0f3;
+    border-left: 4px solid var(--accent, #3498db);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    animation: fieldCardIn 0.4s ease both;
+  }
+
+  .field-card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .field-card-filled {
+    border-color: var(--accent, #3498db);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent, #3498db) 12%, transparent);
+  }
+
+  @keyframes fieldCardIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .field-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .field-icon {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: color-mix(in srgb, var(--accent, #3498db) 14%, white);
+    color: var(--accent, #3498db);
+  }
+
+  .field-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .field-card label {
+    font-weight: 600;
+    color: #3b4a54;
+  }
+
+  .required-star {
+    color: #e74c3c;
+    margin-left: 3px;
+  }
+
+  .field-card input,
+  .field-card textarea {
+    border: 1px solid #e3e7eb;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    resize: vertical;
+  }
+
+  .field-card input:focus,
+  .field-card textarea:focus {
+    outline: none;
+    border-color: var(--accent, #3498db);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent, #3498db) 20%, transparent);
+  }
+
+  .field-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: #aaa;
+  }
+
+  .field-check {
+    color: #27ae60;
+    font-weight: 700;
+  }
+
+  .entry-form-actions {
+    grid-column: 1 / -1;
+    margin-top: 6px;
+  }
+
+  .entry-submit-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 150px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #3498db, #6c5ce7);
+  }
+
+  .entry-submit-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+  }
+
+  .entry-submit-button:hover:not(:disabled)::after {
+    left: 130%;
+  }
+
+  .button-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  .entry-success-screen {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 60vh;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    gap: 6px;
+  }
+
+  .entry-success-screen h2 {
+    margin-top: 10px;
+    color: #27ae60;
+  }
+
+  .big-checkmark {
+    width: 90px;
+    height: 90px;
+    z-index: 1;
+  }
+
+  .big-checkmark-circle {
+    stroke-dasharray: 226;
+    stroke-dashoffset: 226;
+    animation: drawCircle 0.5s ease forwards;
+  }
+
+  .big-checkmark-tick {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: drawTick 0.4s ease 0.45s forwards;
+  }
+
+  @keyframes drawCircle {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes drawTick {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .confetti-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .confetti-piece {
+    position: absolute;
+    top: -10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    animation-name: confettiFall;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(220px) rotate(360deg); opacity: 0; }
+  }
+
+  @media (max-width: 768px) {
+    .entry-hero {
+      flex-direction: column;
+      text-align: center;
+      padding: 22px 20px;
+    }
+
+    .hero-illustration {
+      width: 140px;
+    }
+
+    .entry-form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* Responsive Design */
   @media (max-width: 768px) {
     .button-container {

@@ -36,4 +36,8 @@ public class User {
 
     @Column(nullable = false)
     private String role = "ROLE_USER";
+
+    // False until the user clicks the link in their verification email.
+    @Column(nullable = false)
+    private boolean enabled = false;
 }
