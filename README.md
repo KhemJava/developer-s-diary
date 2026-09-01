@@ -78,10 +78,6 @@ mvn spring-boot:run
 
 ## 📸 Screenshots
 
-### 🏠 Home Page
-
-![Home Page](./screenshots/home-page.png)
-
 ### 📊 Dashboard
 
 ![Dashboard](./screenshots/dashboard.png)
